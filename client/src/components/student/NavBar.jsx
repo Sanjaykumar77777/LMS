@@ -3,13 +3,40 @@ import { assets } from "../../assets/assets";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
-  const { navigate, isEducator } = useContext(AppContext);
+  const { navigate, isEducator, backendUrl, setIsEducator, getToken } =
+    useContext(AppContext);
 
   const isCourseListPage = location.pathname.includes("/course-list");
   const { openSignIn } = useClerk();
   const { user } = useUser();
+
+  const becomeEducator = async () => {
+    try {
+      if (isEducator) {
+        navigate("/educator");
+        return;
+      }
+
+      const token = await getToken();
+      const { data } = await axios.get(
+        backendUrl + "/api/educator/update-role",
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.success) {
+        setIsEducator(true);
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <div
@@ -27,7 +54,7 @@ const NavBar = () => {
             <>
               <button
                 onClick={() => {
-                  navigate("/educator");
+                  becomeEducator();
                 }}
               >
                 {isEducator ? "Educator Dashboard" : "Become Educator"}
@@ -57,7 +84,7 @@ const NavBar = () => {
             <>
               <button
                 onClick={() => {
-                  navigate("/educator");
+                  becomeEducator;
                 }}
               >
                 {isEducator ? "Educator Dashboard" : "Become Educator"}
