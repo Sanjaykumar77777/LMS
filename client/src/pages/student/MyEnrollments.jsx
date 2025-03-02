@@ -112,8 +112,8 @@ const MyEnrollments = () => {
                     progressArray[index].lectureCompleted /
                       progressArray[index].totalLectures ===
                       1
-                      ? "On Going"
-                      : "Completed"}
+                      ? "Completed"
+                      : "On Going"}
                   </button>
                 </td>
               </tr>
