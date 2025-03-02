@@ -231,9 +231,7 @@ const CourseDetails = () => {
           {playerData ? (
             <YouTube
               videoId={playerData.videoId}
-              opts={{
-                playerVars: { autoplay: 1, origin: "http://localhost:5173" },
-              }}
+              opts={{ playerVars: { autoplay: 1 } }}
               iframeClassName="w-full aspect-video"
             />
           ) : (
