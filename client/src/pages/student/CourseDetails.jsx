@@ -52,7 +52,7 @@ const CourseDetails = () => {
       }
 
       const token = await getToken();
-      const { data } = await axios.get(
+      const { data } = await axios.post(
         backendUrl + "/api/user/purchase",
         {
           courseId: courseData._id,
