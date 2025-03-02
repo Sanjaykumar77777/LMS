@@ -185,13 +185,13 @@ const CourseDetails = () => {
                             <div className="flex gap-2">
                               {lecture.isPreviewFree && (
                                 <p
-                                  onClick={() => {
-                                    const videoId = lecture.lectureUrl
-                                      .split("/")
-                                      .pop();
-                                    console.log("Extracted Video ID:", videoId);
-                                    setPlayerData({ videoId });
-                                  }}
+                                  onClick={() =>
+                                    setPlayerData({
+                                      videoId: lecture.lectureUrl
+                                        .split("/")
+                                        .pop(),
+                                    })
+                                  }
                                   className="text-blue-500 cursor-pointer"
                                 >
                                   Preview
