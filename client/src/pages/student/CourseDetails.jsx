@@ -235,7 +235,11 @@ const CourseDetails = () => {
               iframeClassName="w-full aspect-video"
             />
           ) : (
-            <img src={courseData.courseThumbnail} alt="thumbnail icon" />
+            <img
+              className="h-full w-full"
+              src={courseData.courseThumbnail}
+              alt="thumbnail icon"
+            />
           )}
 
           <div className="p-5">
